@@ -5,8 +5,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
         <title>新闻发布系统</title>
-        <link rel="stylesheet" href="./style/weui.css">
-        <link rel="stylesheet" href="./example/example.css">
+        <link rel="stylesheet" href="<?php echo base_url('application/views/css/weui.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('application/views/css/example.css'); ?>">
     </head>
     <body>
     <form action="" method="post">
@@ -51,7 +51,7 @@
         </div>
     </form>
     </body>
-    <script src="./example/zepto.min.js"></script>
+   <script src="<?php echo base_url('application/views/js/zepto.min.js'); ?>"></script>
     <script type="javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
