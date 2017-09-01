@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="<?php echo base_url('application/views/css/example.css'); ?>">
     </head>
     <body>
-    <form action="" method="post">
+    <form action="<?php echo site_url('Article/article_add')?>" method="post">
         <div class="weui-toptips weui-toptips_warn js_tooltips" style="display:none;">数据不能为空</div>
         <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label">新闻标题:</label></div>
@@ -47,7 +47,7 @@
             </span>
         </label>
         <div class="weui-btn-area">
-          <a class="weui-btn weui-btn_primary" href="list.html"  id="showTooltips">确认发布</a>
+        <button class="weui-btn weui-btn_primary" type="submit"  id="showTooltips">确认发布</button>
         </div>
     </form>
     </body>

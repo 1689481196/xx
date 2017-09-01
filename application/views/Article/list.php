@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+        <title>新闻发布系统</title>
+          <link rel="stylesheet" href="<?php echo base_url('application/views/css/weui.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('application/views/css/example.css'); ?>">
+    </head>
+    <body>
+    <div class="content">
+        <?php foreach ($news_list as $v):?>
+            <div class="weui-form-preview">
+                <div class="weui-form-preview__bd">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">新闻标题</label>
+                        <span class="weui-form-preview__value"><?php echo $v['title']?></span>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-form-preview">
+                <div class="weui-form-preview__bd">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">发布时间</label>
+                        <span class="weui-form-preview__value"><?php echo $v['time']?></span>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-form-preview">
+                <div class="weui-form-preview__bd">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">发布作者</label>
+                        <span class="weui-form-preview__value"><?php echo $v['author']?></span>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-form-preview">
+                <div class="weui-form-preview__bd">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">新闻内容</label>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cells weui-cells_form" style="margin-top: -5px;">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入新闻发布内容" rows="3" name="content" id="content" style="color: #999999"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
+            </div>
+            <div class="weui-form-preview__ft">
+                <div id="dialogs">
+                    <div class="js_dialog" id="delete1-Dialog" style="display: none;">
+                        <div class="weui-mask"></div>
+                            <div class="weui-dialog">
+                                <div class="weui-dialog__title">确定删除吗？</div>
+                                <div class="weui-dialog__ft">
+                                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="ture">确定</a>
+                                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" id="false">取消</a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                    <a type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" href="<?php echo site_url('Article/edit/edit.php')?>">编辑</a>
+                    <a type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" id="del">删除</a>
+            </div>
+            </div>
+        <?php endforeach ?>
+    </div>
+    </body>
+    <script src="<?php echo base_url('application/views/js/zepto.min.js'); ?>"></script>
+    <script type="javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+    <script type="text/javascript">
+     $("#del").click(function(){
+        var del=$("#delete1-Dialog").css('display');
+        if(del=="none"){
+            $("#delete1-Dialog").css("display","block");
+        }else{
+            $("#delete1-Dialog").css("display","none");
+        }
+     });
+     $("#ture").click(function(){
+        var all=$("#delete1-Dialog").css('display','none');
+     });
+     $("#false").click(function(){
+        var alldel=$("#delete1-Dialog").css('display','none');
+     });
+    </script>
+</html>
