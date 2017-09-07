@@ -4,7 +4,7 @@ class article_model extends CI_Model{
     public function __construct() {
         parent::__construct();
     }
-        //数据添加的s
+        //数据添加的sql
     public function add($data){
         return $this->db->insert('article',$data);
     }
@@ -21,7 +21,6 @@ class article_model extends CI_Model{
         //数据修改
     public function update($id,$data){
         return $this->db->update('article',$data,array('id'=>$id));
-        // var_dump($data);exit;
     }
         //删除数据
     public function deltele($id){

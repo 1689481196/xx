@@ -44,7 +44,7 @@
             <div class="weui-cell">
                 <div class="weui-cell__bd">
                     <textarea class="weui-textarea"  rows="3" name="content" id="te"  onfocus="ss=setInterval(sp,600)" onblur="clearInterval(ss)"><?php echo $v['content']?></textarea>
-                    <div class="weui-textarea-counter">你已经输入<span id="span">0</span>字/200</div>
+                    <div class="weui-textarea-counter">你已经输入<span id="span" >0</span>字/200</div>
                 </div>
             </div>
         </div>
@@ -72,14 +72,19 @@
         var tex = $('#te').val();
         var num =tex.length;
         $('#span').text(num);
+        if(num>200){
+            var num = $("#te").val().substr(0,200,'utf-8');
+            $("#te").val(num);
+        }
     }
+    setInterval(sp,100);
     $('#showTooltips').on('click', function() {
         var toast = $("#toast");
         if (toast.css('display') != 'none') return;
-        toast.fadeIn(100);
+        toast.fadeIn(1);
         setTimeout(function(){
-            toast.fadeOut(100);
-        },2000);
+            toast.fadeOut(200);
+        },5000);
     });
     </script>
     </html>

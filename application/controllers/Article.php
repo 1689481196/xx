@@ -50,7 +50,6 @@ class Article extends CI_Controller{
             'content' => $content,
             'time' => $time
         );
-        // var_dump($data);exit;
         $this->load->model('article_model');
         $datas['article_edit']= $this->article_model->update($id,$data);
         if ($datas) {
@@ -72,7 +71,7 @@ class Article extends CI_Controller{
 
         //列表页
     public function listing(){
-        $this->load->model('article_model','art');
+        $this->load->model('article_model');
         //接收page
         $page = $this->input->get('page') ? $this->input->get('page') : 1;
         //每页显示10条
@@ -81,7 +80,7 @@ class Article extends CI_Controller{
         $offset = ($page - 1) * $limit;
         // var_dump($offset);exit;
         //查询出数组
-        $data = $this->art->all();
+        $data = $this->article_model->all();
         //count()函数用来返回数组中的目录;总条数
         $all_data = count($data);
         //引入分页类
@@ -106,14 +105,7 @@ class Article extends CI_Controller{
         $this->pagination->initialize($config);
         //可以输出查看结果是一串html字符串  生成的就是首页尾页上一页下一页的html文字在页面循环出来pageinfo数据
         $data['pageinfo'] = $this->pagination->create_links();
-        $data['goodstypes']=$this->art->list_goodstype($limit, $offset);
-        // echo "<pre>";
-        // var_dump($data);exit;
-        // foreach ($data as $k => $v) {
-        //     $v['title'] = mb_substr($v['title'],0,4,'utf-8');
-
-        // }
-
+        $data['goodstypes']=$this->article_model->list_goodstype($limit, $offset);
         $this->load->view('Article/listing',$data);
     }
         //查看详情

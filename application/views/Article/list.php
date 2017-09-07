@@ -48,8 +48,8 @@
             <div class="weui-cells weui-cells_form" style="margin-top: -5px;">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <textarea class="weui-textarea"  rows="3" name="content" readonly="readonly" id="content" style="color: #999999"><?php echo $v['content']?></textarea>
-                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                    <textarea class="weui-textarea"  rows="3" name="content" readonly="readonly" id="te" style="color: #999999" onfocus="ss=setInterval(sp,600)" onblur="clearInterval(ss)"><?php echo $v['content']?></textarea>
+                    <div class="weui-textarea-counter">你已经输入<span id="span" >0</span>字/200</div>
                 </div>
             </div>
             <div class="weui-form-preview__ft">
@@ -101,9 +101,18 @@
                     return false;
                 }
             }
-
         });
-     }
-
+    };
+    function sp(){
+        var tex = $('#te').val();
+        var num = tex.length;
+        $('#span').text(num);
+        if(num>200){
+            var num = $("#te").val().substr(0,200,'utf-8');
+            $("#te").val(num);
+        }
+    }
+    setInterval(sp,100);
     </script>
+
 </html>

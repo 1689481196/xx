@@ -128,16 +128,19 @@
                 if(!is_readed){
                 $tooltips.css('display','block');
                 $tooltips.html("请同意");
+                setTimeout(function() {
+                    $tooltips.css('display', 'none');
+                }, 2000);
                 return false;
             }
-            //     var toast = $("#toast");
-            // if (toast.css('display') != 'none') return;
-            // toast.fadeIn(100);
-            // setTimeout(function(){
-            // toast.fadeOut(100);
+                var toast = $("#toast");
+            if (toast.css('display') != 'none') return;
+            toast.fadeIn(1);
+            setTimeout(function(){
+            toast.fadeOut(1);
+            },5000);
 
-            // },2000);
-            // return false;
+
             });
     });
     </script>
