@@ -14,8 +14,8 @@
     </div>
     <?php foreach ($goodstypes as $v):?>
     <div class="weui-cell weui-cell_switch">
-        <a  class="weui-cell__bd" style="color:green" href="<?php  echo site_url('Article/list_detail/'.$v['id'])?>">新闻标题:<?php echo mb_substr($v['title'],0,4,'utf-8')?></a>
-        <a  class="weui-cell__bd" style="color:#000000"><?php echo $v['time']?></a>
+        <a  class="weui-cell__bd" style="color:green" href="<?php  echo site_url('Article/list_detail/'.$v['id'])?>">新闻标题:<?php echo mb_substr($v['title'],0,3,'utf-8')?></a>
+        <a  class="weui-cell__bd" style="color:#000000;margin-left:10x;" ><?php echo $v['time']?></a>
         <a href="<?php  echo site_url('Article/list_detail/'.$v['id'])?>" class="weui-btn weui-btn_mini weui-btn_primary" style="width: 90px;">查看详情</a>
     </div>
     <?php endforeach?>

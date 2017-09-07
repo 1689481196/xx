@@ -15,7 +15,7 @@
         </style>
     </head>
     <body>
-    <form action="<?php echo site_url('Article/article_add')?>" method="post">
+    <form id="form" action="<?php echo site_url('Article/article_add')?>" method="post">
          <div class="weui-cell" style="background-color: #cccccc;height: 20px">
                 <div class="weui-cell__hd"><label class="weui-label"></label></div>
                 <div class="weui-cell__bd" >
@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="weui-btn-area">
-        <button class="weui-btn weui-btn_primary" type="submit"  id="showTooltips">确认发布</button>
+        <button class="weui-btn weui-btn_primary" type="button"  id="showTooltips">确认发布</button>
         </div>
         <div class="weui-btn-area">
         <a class="weui-btn weui-btn_primary" type="reset"  id="showTooltips" href="<?php echo site_url("Article/listing")?>">返回</a>
@@ -105,7 +105,7 @@
                 }, 2000);
               return false;
             }
-                var author=$("#author").val();
+            var author=$("#author").val();
                 if(!author){
                 $tooltips.css('display','block');
                 $tooltips.html("发布作者不能为空");
@@ -123,25 +123,24 @@
                 }, 2000);
                 return false;
             }
-
-                var is_readed = $('#weuiAgree').prop('checked');
-                if(!is_readed){
-                $tooltips.css('display','block');
-                $tooltips.html("请同意");
-                setTimeout(function() {
-                    $tooltips.css('display', 'none');
-                }, 2000);
+            var is_readed = $('#weuiAgree').prop('checked');
+            if(!is_readed){
+            $tooltips.css('display','block');
+            $tooltips.html("请同意");
+            setTimeout(function() {
+                $tooltips.css('display', 'none');
+            }, 2000);
                 return false;
             }
-                var toast = $("#toast");
-            if (toast.css('display') != 'none') return;
-            toast.fadeIn(1);
+            var toast = $("#toast");
+            if(toast.css('display') != 'none') return;
+            toast.fadeIn(100);
             setTimeout(function(){
-            toast.fadeOut(1);
-            },5000);
-
-
+            toast.fadeOut(100, function() {
+                $('#form').submit();
             });
+        },2000);
+        });
     });
     </script>
 </html>

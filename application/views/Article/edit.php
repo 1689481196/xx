@@ -16,7 +16,7 @@
         </style>
     </head>
     <body>
-    <form action="<?php echo site_url('Article/edit_update')?>" method="post">
+    <form id="form" action="<?php echo site_url('Article/edit_update')?>" method="post">
         <?php foreach($article_edit as $v)?>
         <input type="hidden" name="id" value="<?php echo $article_edit[0]['id']?>">
         <div class="weui-cell">
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="weui-btn-area">
-        <button class="weui-btn weui-btn_primary" type="submit"  id="showTooltips" ">确认修改</button>
+        <button class="weui-btn weui-btn_primary" type="button"  id="showTooltips">确认修改</button>
         </div>
         <div class="weui-btn-area">
         <a class="weui-btn weui-btn_primary" type="reset"  id="" href="<?php echo site_url("Article/listing")?>">返回</a>
@@ -81,10 +81,13 @@
     $('#showTooltips').on('click', function() {
         var toast = $("#toast");
         if (toast.css('display') != 'none') return;
-        toast.fadeIn(1);
+        toast.fadeIn(100);
         setTimeout(function(){
-            toast.fadeOut(200);
-        },5000);
+            toast.fadeOut(100, function() {
+                $('#form').submit();
+            });
+        },2000);
+
     });
     </script>
-    </html>
+</html>
