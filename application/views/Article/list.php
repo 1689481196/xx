@@ -10,6 +10,9 @@
     </head>
     <body>
     <div class="content">
+    <div style="background-color: #cccccc">
+    <a class="weui-btn weui-btn_primary" type="submit"  id="showTooltips" style="width: 100px;margin: 0 1px;" href="<?php echo site_url("Article/listing")?>">返回列表</a>
+    </div>
         <?php foreach ($news_list as $v):?>
             <div class="weui-form-preview">
                 <div class="weui-form-preview__bd">
@@ -45,7 +48,7 @@
             <div class="weui-cells weui-cells_form" style="margin-top: -5px;">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="请输入新闻发布内容" rows="3" name="content" id="content" style="color: #999999"></textarea>
+                    <textarea class="weui-textarea"  rows="3" name="content" readonly="readonly" id="content" style="color: #999999"><?php echo $v['content']?></textarea>
                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                 </div>
             </div>
@@ -56,14 +59,14 @@
                             <div class="weui-dialog">
                                 <div class="weui-dialog__title">确定删除吗？</div>
                                 <div class="weui-dialog__ft">
-                                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="ture">确定</a>
-                                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" id="false">取消</a>
+                                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="ture" onclick="del(<?php echo $v['id']?>,$(this))">确定</a>
+                                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" id="false"onclick="delss($(this))">取消</a>
                                 </div>
                             </div>
                     </div>
                 </div>
-                    <a type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" href="<?php echo site_url('Article/edit/edit.php')?>">编辑</a>
-                    <a type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" id="del">删除</a>
+                    <a type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" href="<?php echo site_url('Article/edit/'.$v['id'])?>">编辑</a>
+                    <a type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="dels($(this))">删除</a>
             </div>
             </div>
         <?php endforeach ?>
@@ -74,19 +77,33 @@
     <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
     <script type="text/javascript">
-     $("#del").click(function(){
-        var del=$("#delete1-Dialog").css('display');
-        if(del=="none"){
-            $("#delete1-Dialog").css("display","block");
-        }else{
-            $("#delete1-Dialog").css("display","none");
-        }
-     });
-     $("#ture").click(function(){
-        var all=$("#delete1-Dialog").css('display','none');
-     });
-     $("#false").click(function(){
-        var alldel=$("#delete1-Dialog").css('display','none');
-     });
+    function dels(thisobj){
+        thisobj.parent().find('#dialogs').find('#delete1-Dialog').fadeIn(25);
+     };
+    function delss(thisobject){
+        thisobject.parents('.js_dialog').fadeOut(1);
+     };
+    function del(id,thisobj){
+        var id=id;
+        var url='<?php echo site_url('Article/del')?>';
+        $.ajax({
+            type:"POST",
+            url:url,
+            data:{'id':id},
+            dataType:"json",
+            async:false,
+            success:function(data){
+                if (data.data==1){
+                    thisobj.parents('.js_dialog').fadeOut(1);
+                    window.location.href="<?php echo site_url('Article/listing')?>";
+                }else if (data==0){
+                    alert('删除失败');
+                    return false;
+                }
+            }
+
+        });
+     }
+
     </script>
 </html>
