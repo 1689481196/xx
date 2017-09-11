@@ -35,7 +35,7 @@ class article_model extends CI_Model{
     public function detail($id){
         return $this->db->where(array('id'=>$id))->get('article')->result_array();
     }
-    public function list_goodstype($limit, $offset){
+    public function list_goodstype($limit,$offset){
         $this->db->select('*');
         $this->db->from('article');
         $this->db->limit($limit, $offset);

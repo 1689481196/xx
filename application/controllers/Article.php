@@ -74,23 +74,27 @@ class Article extends CI_Controller{
         $this->load->model('article_model');
         //接收page
         $page = $this->input->get('page') ? $this->input->get('page') : 1;
+        // var_dump($page);exit;
         //每页显示10条
-        $limit = 10;
+        $limit = 20;
         // 偏移量
         $offset = ($page - 1) * $limit;
         // var_dump($offset);exit;
+        // var_dump($offset);exit;
         //查询出数组
         $data = $this->article_model->all();
+        // echo "<pre>";
+        // var_dump($data);exit;
         //count()函数用来返回数组中的目录;总条数
         $all_data = count($data);
-        //引入分页类
+
         $this->load->library('pagination');
         //总页数 ceil()函数向上取整;
         $total_rows = ceil($all_data);
         //配置分页信息
         $config['base_url'] = site_url('Article/listing');
         //配置总条数
-        $config['total_rows']=$all_data;
+        $config['total_rows'] = $total_rows;
         $config['page_query_string'] = TRUE;
         $config['query_string_segment'] = 'page';
         $config['use_page_numbers'] = TRUE;
@@ -104,10 +108,28 @@ class Article extends CI_Controller{
         //初始化分类页
         $this->pagination->initialize($config);
         //可以输出查看结果是一串html字符串  生成的就是首页尾页上一页下一页的html文字在页面循环出来pageinfo数据
-        $data['pageinfo'] = $this->pagination->create_links();
-        $data['goodstypes']=$this->article_model->list_goodstype($limit, $offset);
+        // $data['pageinfo'] = $this->pagination->create_links();
+        $data['goodstypes']=$this->article_model->list_goodstype($limit,$offset);
         $this->load->view('Article/listing',$data);
     }
+        //下拉刷新
+    public function refresh_list(){
+        //1.接收page
+        $page = $this->input->get('page') ? $this->input->get('page') : 1;
+        //2.定义每页显示的条数limit
+        $limit = 10;
+        //3.计算偏移量offset
+        $offset = ($page-1) * $limit;
+        //4.查询出所有的数据
+        $this->load->model('article_model');
+        $list = $this->article_model->all();
+        // $total_rows = count($list);
+        //获取所有的数据
+        $data = $this->article_model->list_goodstype($limit,$offset);
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
+
+
         //查看详情
     public function list_detail(){
         //接收id值

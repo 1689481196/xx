@@ -13,6 +13,7 @@
     <div style="background-color: #cccccc">
     <a class="weui-btn weui-btn_primary" type="submit"  id="showTooltips" style="width: 100px;margin: 0 1px;" href="<?php echo site_url("Article/listing")?>">返回列表</a>
     </div>
+    <div id="content" >
         <?php foreach ($news_list as $v):?>
             <div class="weui-form-preview">
                 <div class="weui-form-preview__bd">
@@ -70,6 +71,7 @@
             </div>
             </div>
         <?php endforeach ?>
+        </div>
     </div>
     </body>
     <script src="<?php echo base_url('application/views/js/zepto.min.js'); ?>"></script>
